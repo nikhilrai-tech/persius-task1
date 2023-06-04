@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-2">
+  <div class="row">
+    {% for image in images %}
+      <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="card">
+              <img src={{image.image.url}} class="card-img-top" height="250px" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Location:{{ image.location }}</h5>
+
+                <h4 class="text-center m-3">Comments:</h4>
+                {% for comment in comments %}
+                  {% if comment.image == image %}
+                    <p>Name:{{ comment.user.username }} <br>Comment:{{ comment.content }}</p>
+                  {% endif %}
+                {% endfor %}
+                <a href="{% url 'image_detail' image.id%}" class="btn btn-success">Comment</a>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+{% endblock %}
+  </div>
+</div>
